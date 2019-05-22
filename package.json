@@ -1,0 +1,49 @@
+{
+  "name": "rps",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "firebase": "^4.0.0",
+    "firebase-functions": "^0.7.1",
+    "flux": "^3.1.2",
+    "react": "^16.0.0-alpha.13",
+    "react-native": "^0.51.0",
+    "react-native-admob": "^2.0.0-beta.3",
+    "react-native-animatable": "^1.1.1",
+    "react-native-billing": "^2.4.0",
+    "react-native-fbsdk": "^0.6.3",
+    "react-native-fetch-blob": "^0.10.8",
+    "react-native-flags": "git+https://github.com/cherniv/react-native-flags.git",
+    "react-native-gesture-recognizers": "0.2.3",
+    "react-native-google-signin": "^0.12.0",
+    "react-native-i18n": "^2.0.10",
+    "react-native-image-picker": "^0.26.7",
+    "react-native-in-app-utils": "^6.0.0",
+    "react-native-sound": "^0.10.4",
+    "react-native-splash-screen": "^3.0.6",
+    "react-native-swiper": "^1.5.13",
+    "react-native-vector-icons": "^4.4.2",
+    "react-navigation": "^2.2.5"
+  },
+  "jest": {
+    "preset": "jest-react-native"
+  },
+  "devDependencies": {
+    "babel-jest": "16.0.0",
+    "babel-plugin-transform-remove-console": "^6.8.5",
+    "babel-preset-react-native": "1.9.0",
+    "events": "^1.1.1",
+    "jest": "16.0.2",
+    "jest-react-native": "16.0.0",
+    "react-test-renderer": "15.3.2"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
+  }
+}

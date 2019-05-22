@@ -1,0 +1,22 @@
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "difficulties": {
+        ".read": true,
+    },
+    "levels": {
+        ".read": true,
+    },
+    "highscore-levels": {
+    	"${diff}": {
+    		"${level}": {
+    			".indexOn": ".value"
+    		} 
+    	}
+    },
+    "share": {
+        ".read": true,
+    },
+  }
+}

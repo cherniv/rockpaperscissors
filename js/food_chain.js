@@ -1,0 +1,23 @@
+module.exports = {
+      "easy":{
+        "A":"C",
+        "B":"A",
+        "C":"B"
+      },
+      "medium":{
+        "A":"C",
+        "B":"A",
+        "C":"B"
+      },
+      "hard":{
+        "A":"C",
+        "D":"A",
+        "B":"D",
+        "C":"B"
+      },
+      "extreme":{
+        "A":"C",
+        "D":"A",
+        "B":"D",
+        "C":"B"
+      }}
