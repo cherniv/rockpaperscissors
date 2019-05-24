@@ -1,0 +1,17 @@
+export const BUTTON_PRESS = {
+  START_GAME: 'START_GAME'
+};
+
+export const SETTINGS = {
+  BRIGHTNESS_CHANGED: 'BRIGHTNESS_CHANGED', 
+  };
+
+export const  APP = {
+    FIREBASE_AUTH_STATE_CHANGE: 'FIREBASE_AUTH_STATE_CHANGE',
+  };
+
+export default {
+  BUTTON_PRESS,
+  SETTINGS,
+  APP,
+};
