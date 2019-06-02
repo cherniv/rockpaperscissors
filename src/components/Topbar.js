@@ -19,7 +19,7 @@ export default class Topbar extends React.Component {
 	}
 
 	renderBackButton() {
-		if (this.props.noback) return null;
+		if (this.props.noback || this.props.back == false) return null;
 		return (
 			<Button 
 				vertical={true}
@@ -27,6 +27,22 @@ export default class Topbar extends React.Component {
 	            //text="Home"
 	            family='Ionicons'
 	            icon="md-arrow-round-back"
+	            iconSize="12" 
+	            style={styles.backButton}
+	           // textStyle={styles.buttonText}
+	        />
+		)
+	}
+
+	renderHomeButton() {
+		if (this.props.home != true) return null;
+		return (
+			<Button 
+				vertical={true}
+	            onPressAction={BUTTON_PRESS.HOME}
+	            //text="Home"
+	            //family='Ionicons'
+	            icon="home"
 	            iconSize="12" 
 	            style={styles.backButton}
 	           // textStyle={styles.buttonText}
@@ -45,6 +61,7 @@ export default class Topbar extends React.Component {
 		return (
 			<View style={styles.container}>
 				{this.renderBackButton()}
+				{this.renderHomeButton()}
 		        <Text style={styles.title}>{this.props.title}</Text>
 		        {this.renderRightSpace()}
 			</View>

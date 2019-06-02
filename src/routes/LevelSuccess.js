@@ -17,7 +17,7 @@ import {levelSuccess as styles} from '../styles';
 import Background from '../components/Background'
 import LevelsManager from '../models/LevelsManager'
 import * as firebase from 'firebase';
-import LeaderboardItem from '../components/LeaderboardItem';
+//import LeaderboardItem from '../components/LeaderboardItem';
 import Topbar from '../components/Topbar';
 import Auth from '../services/Auth'
 import Dispatcher from '../dispatcher'
@@ -73,7 +73,8 @@ class LevelSuccess extends Component {
 				        iconSize="10" 
 				        style={styles.highscoreButton}
 				        textStyle={styles.highscoreButtonText}
-				    />
+            />
+            {/*
 					<View style={[styles.label, styles.mainSublabel, styles.mainSublabelAfterButton]}>
 						<CurrentLeader diff={params.diff} id={params.id} lastTime={params.time} />
 					</View>
@@ -86,7 +87,7 @@ class LevelSuccess extends Component {
 				        style={styles.highscoreButton}
 				        textStyle={styles.highscoreButtonText}
 				    />
-
+            */}
 			    </View>
 			</Background>
 		)

@@ -7,10 +7,8 @@ import {
 	Text,
 	StyleSheet,
 } from 'react-native';
-export default  () => (
-  <View style={{width: 30, height: 30, backgroundColor: '#ffff00'}} />
-)
-/*
+
+
 import Entypo from 'react-native-vector-icons/Entypo';
 import Octicons from 'react-native-vector-icons/Octicons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -64,4 +62,3 @@ export default class IconComponent extends React.Component {
 var styles = StyleSheet.create({
 	
 });
-*/

@@ -10,13 +10,13 @@ const ROUTES = {
   LEVEL: {screen: require('../routes/level'), ...noswipeback},
   LEVEL_SUCCESS: {screen: require('../routes/LevelSuccess'), ...noswipeback},
   DIFFICULTY_SUCCESS: {screen: require('../routes/DifficultySuccess')},
-  LEADERBOARD_LEVEL: {screen: require('../routes/LeaderboardPage')},
-  LEADERBOARD_DIFFICULTY: {screen: require('../routes/LeaderboardDifficultyPage')},
-  SETTINGS: {screen: require('../routes/Settings')},
-  FLAGS: {screen: require('../routes/Flags')},
-  HELP: {screen: require('../components/Help')},
+  //LEADERBOARD_LEVEL: {screen: require('../routes/LeaderboardPage')},
+  //LEADERBOARD_DIFFICULTY: {screen: require('../routes/LeaderboardDifficultyPage')},
+  //SETTINGS: {screen: require('../routes/Settings')},
+  //FLAGS: {screen: require('../routes/Flags')},
+  //HELP: {screen: require('../components/Help')},
   //AD_PREPARE: {screen: require('../routes/AdPrepare')},
-  PROFILE: {screen: require('../routes/UserPage')},
+  //PROFILE: {screen: require('../routes/UserPage')},
 }
 
 const KEYS = {};

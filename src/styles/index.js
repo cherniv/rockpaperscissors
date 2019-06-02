@@ -13,9 +13,9 @@ const row = 'row';
 
 const BAR_HEIGHT = px(50);
 
-const LEVELS_MENU_PADDING = px(10);
-const LEVELS_MENU_CELL_SIZE = Math.floor((width - LEVELS_MENU_PADDING * 2) / 5);
-
+const LEVELS_MENU_PADDING = px(1);
+const LEVELS_MENU_CELL_SIZE = px(32); //Math.floor((width - LEVELS_MENU_PADDING * 2) / 5);
+const LEVELS_MENU_COLUMNS = 10
 const fbColor = HexToRgba('#4267B1', 0.9);
 const googleColor = HexToRgba('#DB4537', 0.9);
 
@@ -29,7 +29,7 @@ centeredContent = {
 transparent = {
 	backgroundColor: 'transparent',
 },
-_button = {
+button = {
 	borderWidth: 1,
 	borderStyle: 'solid',
 	borderColor: '#ffffff',
@@ -59,13 +59,6 @@ buttonText = {
 },
 bold = {
 	fontWeight: 'bold',
-},
-buttonInnerWrapperHorizontal = {
-	flexDirection: 'row',
-	alignItems: center,
-},
-buttonInnerWrapperVertical = {
-	alignItems: center,
 },
 squareButton = {
 	width: px(42),
@@ -120,19 +113,9 @@ whiteText = {
 	color: '#ffffff',
 },
 shadowForText = {
-	shadowColor: '#000000',
-  shadowOffset: {
-    width: 0,
-    height: 0,
-  },
-  shadowRadius: 1.2,
-  shadowOpacity: 0.6,
-  backgroundColor: 'transparent',
-  ...Device.select({
-  	android: {
-  		elevation: 5,
-  	}
-  }),
+	textShadowColor: 'rgba(0, 0, 0, 0.1)',
+  textShadowOffset: {width: 0, height: 1},
+  textShadowRadius: 2
 },
 mainLabel = {
 	...shadowForText,
@@ -164,21 +147,33 @@ backButton = {
 	...barButton,
 }
 
-
-export const 
-	button = C({
-		innerWrapperHorizontal: buttonInnerWrapperHorizontal,
-		innerWrapperVertical: buttonInnerWrapperVertical,
-  });
+export const buttonInnerWrapper = C({
+  horizontal: {
+    flexDirection: 'row',
+    alignItems: center,
+  },
+  vertical: {
+	  alignItems: center,
+  },
+  animatedInnerContainer: {
+    flex: 1, 
+    flexDirection: 'row', 
+    width: '100%', 
+    alignItems: center,
+    justifyContent: center,
+  }
+});
 
 export const 
 	levels = C({
 		container: {
         flex: 1,
+        
     },
     list: {
     	...flex,
-    	...centeredContent,
+      ...centeredContent,
+      
     },
     mainLabel: {
 			...mainLabel,
@@ -192,17 +187,18 @@ export const
 			width: LEVELS_MENU_CELL_SIZE - LEVELS_MENU_PADDING, 
 			height: LEVELS_MENU_CELL_SIZE - LEVELS_MENU_PADDING,
 			margin: LEVELS_MENU_PADDING/2,
-			//overflow: 'hidden',
+      overflow: 'hidden',
 		},
 		lockedLevel: {
 			//shadowColor: 'transparent',
 			borderColor: 'rgba(255,255,255,0.2)',
-			transform: [{scale: 0.9}]
+			transform: [{scale: 0.8}]
 		},
 		passedLevel: {
 			
 			borderColor: 'rgba(255,255,255,0.8)',
-			opacity: 0.9,
+      opacity: 0.9,
+      
 		},
 		currentLevel: {
 			//backgroundColor: 'rgba(255,255,255,0.1)',
@@ -211,8 +207,9 @@ export const
 		},
 		buttonText: {...buttonText},
 		tab: {
-        width,
-        paddingHorizontal: LEVELS_MENU_PADDING,
+      width: LEVELS_MENU_CELL_SIZE * LEVELS_MENU_COLUMNS,
+        backgroundColor: '#009900',
+        //paddingHorizontal: LEVELS_MENU_PADDING,
         backgroundColor: 'transparent',
         flexWrap: 'wrap',
         flexDirection: 'row',
@@ -243,13 +240,23 @@ export const
         marginTop: px(10),
         marginBottom: px(20),
     },
+    winnerFighterWrapper: {
+      position: 'absolute',
+    	left: 0,
+      top: 0,
+      backgroundColor: '#000000',
+      width: '100%',
+      height: '100%',
+      alignContent: center,
+      justifyContent: center,
+      alignItems: center,
+      opacity: 0.05,
+    },
     winnerFighter: {
-    	position: 'absolute',
-    	right: -px(1),
-    	top: -1,
-    	width: px(12),
-    	height: px(12),
-    	fontSize: px(12),
+    	
+    	
+      fontSize: px(28),
+     
     },
     currentLevelQuestionMark: {
     	position: 'absolute',
@@ -332,7 +339,8 @@ export const
 		},
 		middleSection: {
 			flex: 1,
-			paddingHorizontal: px(5),
+      paddingHorizontal: px(5),
+      alignItems: 'flex-end',
 			...shadowForText,
 			//...centeredContent
 		},
@@ -502,8 +510,9 @@ export const
 export const
 	difficultiesMenu = C({
 		container: {
-			...flex,
-			//justifyContent: center,
+      ...flex,
+      alignItems: center,
+			justifyContent: center,
 		},
 		diff: {
 			flexDirection: 'row', 

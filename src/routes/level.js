@@ -19,7 +19,9 @@ import Icon from '../components/Icon'
 import {level as styles} from '../styles';
 import FightersService from '../services/FightersService'
 
-var windowWidth = Dimensions.get('window').width;
+var wwidth = Dimensions.get('window').width;
+var hheight = Dimensions.get('window').height;
+var windowWidth = Math.min(wwidth, hheight);
 var cellZone = Math.floor(windowWidth / 7);
 var cellsMargin = Math.floor(cellZone / 14);
 var cellRadius = cellZone - cellsMargin * 2;
@@ -57,10 +59,11 @@ class Level extends Component {
 		this.restartLevel = this.restartLevel.bind(this);
 		this.undoStep = this.undoStep.bind(this);
 		this.showHint = this.showHint.bind(this);
-		this.id = this.props.navigation.state.params.id;
+		this.id = +this.props.navigation.state.params.id;
 		this.diff = this.props.navigation.state.params.diff;
 		LevelsManager.getLevel(this.diff, this.id); // for faster preloading
-		this.registerForEventsListening();
+    this.registerForEventsListening();
+    this.catchCtrlZ();
 	}
 
 	componentWillMount() {
@@ -71,7 +74,18 @@ class Level extends Component {
 		this.stopTimer();
 		this.startTimer();
 		//this.startTutorial();
-	}
+  }
+  
+  catchCtrlZ() {
+    var KeyPress = (e) => {
+      var evtobj = window.event? event : e
+      if (evtobj.keyCode == 90 && (evtobj.ctrlKey || evtobj.metaKey)) {
+        this.undoStep();
+      }
+    }
+
+    document.onkeydown = KeyPress;
+  }
 
 	startTutorial() {
 		Animated.timing(

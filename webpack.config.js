@@ -11,7 +11,11 @@ var DEVELOPMENT = !PRODUCTION;
 module.exports = {
   mode: process.env.NODE_ENV || 'production',
   context: __dirname,
-  devServer: { inline: true, port: 8088 }, // needed only for dev
+  devServer: { // needed only for dev
+    inline: true, 
+    port: 8088, 
+    historyApiFallback: true 
+  }, 
   devtool: 'source-map',
   node: {
     console: true,
@@ -37,6 +41,11 @@ module.exports = {
         }
       },
       {
+        test: /\.ttf$/,
+        loader: "url-loader", // or directly file-loader
+        include: path.resolve(__dirname, "node_modules/react-native-vector-icons"),
+      },
+      {
         test: /\.js$/,
         include: [
           // anything that needs to be compiled to ES5
@@ -44,6 +53,7 @@ module.exports = {
           path.resolve(appDirectory, "node_modules/react-native-flags"),
           path.resolve(appDirectory, "node_modules/react-native-swiper"),
           path.resolve(appDirectory, "node_modules/react-native-gesture-handler"), // for react-navigation
+          path.resolve(appDirectory, "node_modules/react-native-vector-icons"), // for react-navigation
           //path.resolve(appDirectory, "node_modules/react-navigation"),
           path.resolve(appDirectory, "node_modules/@react-navigation"),
           //path.resolve(appDirectory, "node_modules/react-navigation-tabs"),
@@ -69,9 +79,10 @@ module.exports = {
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false
-    })
+    }),
+    //new webpack.DefinePlugin({ '__DEV__': false })
   ].concat(DEVELOPMENT ? [
-    new webpack.DefinePlugin({ '__DEV__': true })
+    //new webpack.DefinePlugin({ '__DEV__': true })
   ] : []),
   resolve: {
     alias: Object.assign(

@@ -61,3 +61,4 @@ ios/FirebaseNanoPB.framework
 ios/GoogleMobileAds.framework
 ios/GoogleToolboxForMac.framework
 ios/nanopb.framework
+dist

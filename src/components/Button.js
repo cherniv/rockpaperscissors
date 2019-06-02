@@ -10,8 +10,8 @@ import {
 import Dispatcher from '../dispatcher';
 import px from '../utils/PixelSizeFixer';
 import Icon from '../components/Icon';
-import {button as styles} from '../styles';
-console.log('stylesstylesstyles', styles)
+import {buttonInnerWrapper as styles} from '../styles';
+
 export default class ButtonComponent extends React.Component {
 	constructor(props) {
 		super(props);
@@ -105,12 +105,12 @@ export default class ButtonComponent extends React.Component {
 			<TouchableElement 
 				onPress={!disabled && this.onPress || null} 
 				underlayColor={!disabled && !this.props.nounderlay && 'rgba(255,255,255,0.2)' || null}
-				//elevation={5}
+        //elevation={5}
+        style={this.props.style}
 			>
-				<Animated.View style={[this.props.style, this.getBlinking()]} >
-	      		<View style={this.props.vertical ? styles.innerWrapperVertical : styles.innerWrapperHorizontal}>
+				<Animated.View style={[styles.animatedInnerContainer,this.getBlinking()]} >
+	      		<View style={this.props.vertical ? styles.vertical : styles.horizontal}>
 		      		{this.props.vertical ? [icon, text] : (dir == 'text-icon' ? [text, icon] : [icon, text])}
-		      		
 	      		</View>
 	      			{this.props.children}
 	      			 {this.renderHintPointer()}

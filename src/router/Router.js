@@ -1,5 +1,5 @@
 import React from 'react';
-import NavigatorComponent, { NavigationActions} from '../navigator';
+import NavigatorComponent, { NavigationActions, StackActions} from '../navigator';
 import LevelsManager from '../models/LevelsManager'
 //var LoginStore = require('stores/LoginStore')
 //import SplashScreen from 'react-native-splash-screen'
@@ -39,7 +39,9 @@ export default class Router extends React.Component {
     return (
       <NavigatorComponent
         //onInit={nav => { Device.isMobile ? navigator = nav : nav}  } // On mobile NavigatorComponent is not ReactNavigation Navigator
-        //ref={nav => { Device.isWeb ? navigator = nav : nav} }        // On mobile NavigatorComponent is customized ReactNavigation Navigator
+        ref={nav => { 
+           navigator = nav ;
+          } }        // On mobile NavigatorComponent is customized ReactNavigation Navigator
         onNavigationStateChange={this.onNavigationStateChange} 
         />
     )
@@ -52,7 +54,7 @@ export default class Router extends React.Component {
     var data = action.data;
 	  switch(action.type) {
       case ActionTypes.APP.FIREBASE_AUTH_STATE_CHANGE:
-        SplashScreen && SplashScreen.hide();
+        //SplashScreen && SplashScreen.hide();
         break;
       case ActionTypes.BUTTON_PRESS.HOME:
         gotoMainRoute(KEYS.HOME);
@@ -150,14 +152,21 @@ var go = function(routeName, params, shouldRememberRoute = false, routeConfig ){
     params,
     type: NavigationActions.NAVIGATE
   })
-
+console.log('GO', navigateAction)
   navigator && navigator.dispatch(navigateAction);
 }
 
 var back = function(key) {
-  if (navigator.state.nav.routes.length > 1)
-    navigator && navigator.dispatch(NavigationActions.back({key}));
+  console.log(111)
+  if (navigator.state.nav.routes.length > 1) {
+    console.log(2222, navigator)
+    console.log(22222, NavigationActions)
+    console.log(22222, NavigationActions)
+    history.back();
+    navigator && navigator.dispatch(StackActions.pop({n: 1}));
+  }
   else {
+    console.log(33333)
     gotoMainRoute(KEYS.HOME);
   }
 }
@@ -170,10 +179,10 @@ var backTo = function(route) {
 }
 
 var gotoMainRoute = function(key) {
-  var routeInStack = findRouteByName(key);
-  if (routeInStack && (!routeInStack.params || Object.keys(routeInStack.params).length == 0))
-    backTo(routeInStack);
-  else 
+  //var routeInStack = findRouteByName(key);
+  //if (routeInStack && (!routeInStack.params || Object.keys(routeInStack.params).length == 0))
+  //  backTo(routeInStack);
+  //else 
     go(key);
 }
 

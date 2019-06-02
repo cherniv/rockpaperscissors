@@ -40,7 +40,8 @@ class Topbar extends React.Component {
     } : {
       customIcon: (
        FightersService.getImage(this.props.hint, styles.hintIconImage)
-      )
+      ),
+      onPress: ()=>alert('Hint: This shape is potential winner ;)')
     }
    
     el = (
@@ -94,10 +95,6 @@ class Topbar extends React.Component {
           pointerFrom='bottom'
           blinking={this.state.blinkRestartButton}
       	/>
-      	<View style={styles.middleSection}>
-          {/*<Text style={styles.levelLabel}>Level: {levelTotalIndex}</Text>*/}
-          <LevelTimer time={this.state.currentTime} />
-      	</View>
       	<Button 
 					vertical={true}
           onPress={this.props.onPressUndo}
@@ -106,7 +103,11 @@ class Topbar extends React.Component {
           iconSize="14" 
           style={styles.button}
           textStyle={styles.buttonText}
-      	/>
+        />
+        <View style={styles.middleSection}>
+        {/*<Text style={styles.levelLabel}>Level: {levelTotalIndex}</Text>*/}
+        <LevelTimer time={this.state.currentTime} />
+      </View>
         {this.renderHintButton()}
 			</View>
 		);
@@ -135,7 +136,7 @@ class LevelTimer extends React.Component {
     time = mins + ':' + secs;
     return (
       <View style={styles.timer}>
-        <Icon family="Feather" name="clock" style={styles.clockIcon} />
+        {/*<Icon family="Feather" name="clock" style={styles.clockIcon} />*/}
         <Text style={styles.timerText}>{time}</Text>
       </View>
     )

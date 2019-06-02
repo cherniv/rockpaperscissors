@@ -158,18 +158,18 @@ export default class Cell extends Component {
     var radius = this.props.radius;
     var margin = this.props.margin;
     var style = [
-      {
-        shadowOffset: {
-          width: this.movementAnimation.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [0, 3, 0],
-          }),
-          height: this.movementAnimation.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [0, 1, 0],
-          })
-        },
-      },
+      // {
+      //   shadowOffset: {
+      //     width: this.movementAnimation.interpolate({
+      //       inputRange: [0, 0.5, 1],
+      //       outputRange: [0, 3, 0],
+      //     }),
+      //     height: this.movementAnimation.interpolate({
+      //       inputRange: [0, 0.5, 1],
+      //       outputRange: [0, 1, 0],
+      //     })
+      //   },
+      // },
       {width: radius - margin, height: radius - margin},
       this.state.nowhereToMove && {
         transform: [  
@@ -259,6 +259,10 @@ var styles = StyleSheet.create({
   cell: {
     alignItems: 'center',
     backgroundColor: 'transparent',
+    cursor: "grab",
+    userSelect: "none",
+   
+
     //overflow: 'hidden'
    // backgroundColor: 'rgba(255,0,0,0.1)',
   },
@@ -267,9 +271,9 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center', 
     zIndex: 2,
-    shadowColor: '#000000',
-    shadowRadius: 1,
-    shadowOpacity: 0.4,
+    //shadowColor: '#000000',
+    //shadowRadius: 1,
+    //shadowOpacity: 0.4,
     transform: [],
     opacity: 1,
   },

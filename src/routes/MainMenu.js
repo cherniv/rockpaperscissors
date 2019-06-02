@@ -14,7 +14,8 @@ import t from '../utils/i18n'
 //import Loading from '../components/Loading';
 
 var mainLogo = {
-  en: require('../assets/images/main_logo_centered_en.png'),
+  //en: require('../assets/images/main_logo_centered_en.png'),
+  en: {uri: 'https://firebasestorage.googleapis.com/v0/b/api-project-1028663812815.appspot.com/o/main_logo_centered_en.png?alt=media&token=5165a9c1-feba-4d0a-9625-9fd6414f92ee'},
   ru: require('../assets/images/main_logo_centered_ru.png'),
 }
 
@@ -49,32 +50,36 @@ class MainMenu extends Component {
     this.setState({loading: true})
   }
 
+  signInAnonimously = () => {
+    this.loadingStart();
+    Auth.signInAnonymously()
+      .then(this.loadingEnd)
+      .catch(()=>this.loadingEnd())
+    
+      //.then(this.signedInAnonymously)
+  }
+
   render() {
     var buttons;
     var {user} = this.state;
 
     var startGameButton = (
       <Button key='startGameButton'
-        onPressAction={BUTTON_PRESS.START_GAME}
+        //onPressAction={BUTTON_PRESS.START_GAME} // FOR NEWGROUNDS - ONLY GUEST MODE
+        onPress={this.signInAnonimously} // FOR NEWGROUNDS - ONLY GUEST MODE
         //onPressData={{}}
         text={t.t('mainMenu.start')}
         icon="game-controller"
         iconSize="18" 
         style={styles.startButton}
         textStyle={styles.startButtonText}
+        dir='icon-text'
       />
     )
 
     var startAsGuestButton = (
       <Button key='startAsGuestButton'
-        onPress={() => {
-          this.loadingStart();
-          Auth.signInAnonymously()
-            .then(this.loadingEnd)
-            .catch(()=>this.loadingEnd())
-          
-            //.then(this.signedInAnonymously)
-        }}
+        onPress={this.signInAnonimously}
         //onPressData={{}}
         text={t.t('mainMenu.playAsGuest')}
         icon="face"
@@ -139,6 +144,8 @@ class MainMenu extends Component {
     } else {
       buttons = badSet;
     }
+
+    buttons = goodSet// FOR NEWGROUNDS - ONLY GUEST MODE
 
     var bottomContent;
     if (this.state.loading) {

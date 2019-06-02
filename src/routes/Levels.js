@@ -17,7 +17,7 @@ import Background from '../components/Background'
 import FightersService from '../services/FightersService'
 import Topbar from '../components/Topbar'
 
-const LEVELS_IN_TAB = 25;
+const LEVELS_IN_TAB = 100;
 
 var windowWidth = Dimensions.get('window').width;
 
@@ -32,12 +32,15 @@ class LevelsScene extends Component {
     }
 
     componentWillMount() {
+      
         this.setState({
             mounted: true,
         })
+     
     }
 
     componentDidMount() {
+      setTimeout(()=>{
         LevelsManager.getDiff(this.diff).then(data => {
             //console.log('GOT LEVELS:', data);
             var lastopened = LevelsManager.getLastOpenedIndex(this.diff);
@@ -47,6 +50,7 @@ class LevelsScene extends Component {
             this.setState({levels: data, lastopened, currentTab})
             );
         }).catch(e => console.log('something went wrong:', e));
+      },15)
     }
 
 	onPress(diff, id) {
@@ -95,6 +99,80 @@ class LevelsScene extends Component {
 		var tabs = [];
         var el;
         var thumbs = [];
+    var levels = this.state.levels; 
+    if (!levels) return null;
+        var lastopened;
+        var tabsLength;
+        var subtitle = (
+            <View style={[styles.label, styles.mainLabel]}>
+                <Text style={styles.mainLabelText}>
+                  
+                </Text>
+            </View>
+        );
+
+        if (levels) {
+            lastopened = this.state.lastopened;
+            tabsLength = Math.floor(levels.length / LEVELS_IN_TAB);
+    		for (var i= 0; i < tabsLength; i ++ ) {
+                var tablevels = levels.slice(i * LEVELS_IN_TAB, i * LEVELS_IN_TAB + LEVELS_IN_TAB);
+                thumbs.push(this.renderThumb(i))
+    			tabs.push(
+    				<TabView 
+    					key={"tab" + i} 
+                        index={i} 
+    					diff={diff} 
+    					levels={tablevels} 
+    					onPress={this.onPress.bind(this)}
+                        lastOpened={lastopened}
+    				/>
+    			)
+    		}
+
+            thumbs = <View style={styles.thumbs} key='thumbs'>
+                        {thumbs}
+                    </View>
+
+            tabs = <ScrollView 
+                        //horizontal={true}
+                        key='tabs'
+                        ref={this.onTabsInit}
+                        pagingEnabled={true} 
+                        contentContainerStyle={{}}
+                        onScroll={this.highlightCorrectThumb}
+                        scrollEventThrottle={100}
+                        >
+                        {tabs}
+                </ScrollView>
+
+            el = <View style={styles.list}>{[
+              //thumbs, 
+              tabs
+            ]}</View>;
+        } else {
+            el = <ActivityIndicator color='#ffffff' />;
+        }
+
+        el = <Background>
+                <View style={styles.container}>
+                    <Topbar 
+                      title={LevelsManager.getDiffTitle(this.diff).toUpperCase()} 
+                      home={true}
+                      back={false}
+                    />
+                    {el}
+                </View>
+            </Background>
+
+        return el;
+    }
+
+	_render() {
+        
+		var diff = this.diff;
+		var tabs = [];
+        var el;
+        var thumbs = [];
 		var levels = this.state.levels; 
         var lastopened;
         var tabsLength;
@@ -129,7 +207,7 @@ class LevelsScene extends Component {
                     </View>
 
             tabs = <ScrollView 
-                        horizontal={true}
+                        //horizontal={true}
                         key='tabs'
                         ref={this.onTabsInit}
                         pagingEnabled={true} 
@@ -179,9 +257,11 @@ class TabView extends React.Component {
                 props.onPressData = {diff: this.props.diff, id: index};
                 if (item.passed) { 
                     props.style.push(styles.passedLevel);
-                    // if (item.whowon) children = (
-                    //     FightersService.getImage(item.whowon, styles.winnerFighter)
-                    // )
+                    if (item.whowon) children = (
+                      <View style={styles.winnerFighterWrapper}>
+                        {FightersService.getImage(item.whowon, styles.winnerFighter)}
+                      </View>
+                    )
                 } else {
                     props.style.push(styles.currentLevel);
                     // children = (

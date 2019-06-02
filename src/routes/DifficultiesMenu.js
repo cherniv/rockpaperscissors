@@ -19,7 +19,7 @@ class MainMenu extends Component {
   render() {
     return (
       <Background>
-      <Topbar title={t.t('difficultiesMenu.title')} />
+      <Topbar title={t.t('difficultiesMenu.title')} home={true} back={false}/>
         <View style={styles.container}>
           <View style={[styles.label, styles.mainSublabel]}>
             <Text style={styles.mainSublabelText}>
@@ -41,13 +41,14 @@ class MainMenu extends Component {
                   <View style={styles.levelsProgress}><Text style={styles.levelsProgressText}>{diff.levelsProgress + '%'}</Text></View>
                 </Button>
               </View>
-              <Button 
+              {/*<Button 
                 onPressAction={BUTTON_PRESS.DIFFICULTY_HIGHSCORE}
                 onPressData={{diff: diff.key}}
                 icon="trophy"
                 iconSize="11" 
                 style={styles.highscoreButton}
               />
+              */}
             </View>
           )}
         </View>
