@@ -1,0 +1,107 @@
+
+.with-preloader > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.with-preloader:empty {
+      position: absolute;
+      top: calc(50% - 6em);
+      left: calc(50% - 6em);
+      width: 10em !important;
+      height: 10em !important;
+      border-top: 1em solid transparent;
+      border-right: 1em solid #ffffff;
+      border-bottom: 1em solid transparent;
+      border-left: 1em solid #ffffff;
+      border-radius: 50%;
+      animation: load88 6s, load8 6s infinite linear;
+      min-height: auto !important;
+      box-shadow: 0 0 60px rgba(0,0,0,0.2);
+      background-color: rgba(0,0,0,0.05);
+    }
+.with-preloader:empty:before {
+  content: 'loading';
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #ffffff;
+    font-size: 12px;
+    text-align: center;
+    line-height: 10em;
+      position: absolute;
+      top: calc(50% - 6em);
+      left: calc(50% - 6em);
+      width: 10em !important;
+      height: 10em;
+      border-top: 1em solid transparent;
+      border-right: 1em solid #ffffff;
+      border-bottom: 1em solid transparent;
+      border-left: 1em solid #ffffff;
+      border-radius: 50%;
+      animation: load88 6s, load8 6s infinite linear;
+      min-height: auto !important;
+      box-shadow: 0 0 60px rgba(0,0,0,0.2);
+      background-color: rgba(0,0,0,0.05);
+    }
+
+    .with-preloader:empty:after {
+      content: "";
+        position: absolute;
+        top: calc(50% - 3em);
+        left: calc(50% - 3em);
+        width: 4em !important;
+        height: 4em;
+        border-top: 1em solid transparent;
+        border-right: 1em solid #ffffff;
+        border-bottom: 1em solid transparent;
+        border-left: 1em solid #ffffff;
+        border-radius: 50%;
+        animation: load88 5s, load8 5s infinite linear;
+        min-height: auto !important;
+        box-shadow: 0 0 60px rgba(0,0,0,0.2);
+        background-color: rgba(0,0,0,0.05);
+      }
+
+  .with-preloader.with-audio:empty {
+    animation: boom 4s infinite linear;
+  }
+
+    @keyframes load8 {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes load88 {
+      0% {
+        opacity: 0;
+        transform: rotate(0deg) scale(0);
+      }
+      100% {
+         opacity: 1;
+        transform: rotate(360deg) scale(1);
+      }
+    }
+
+    @keyframes boom {
+      0% {
+        transform: scale(1) rotate(0deg);
+      }
+      25% {
+        transform: scale(1.2) rotate(90deg);
+      }
+      50% {
+        transform: scale(1) rotate(180deg);
+      }
+      75% {
+        transform: scale(1.2) rotate(270deg);
+      }
+      100% {
+        transform: scale(1) rotate(360deg);
+      }
+    }

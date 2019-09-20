@@ -12,6 +12,7 @@ import px from '../utils/PixelSizeFixer';
 import {BUTTON_PRESS} from '../actions';
 import Button from '../components/Button';
 import {topbar as styles} from '../styles';
+import LevelsManager from '../models/LevelsManager';
 
 export default class Topbar extends React.Component {
 	constructor(props) {
@@ -31,6 +32,25 @@ export default class Topbar extends React.Component {
 	            style={styles.backButton}
 	           // textStyle={styles.buttonText}
 	        />
+		)
+  }
+  
+	renderDiffButton() {
+    var {diff} = this.props;
+    if ((!diff)) return null;
+    
+		//var diffLabel = LevelsManager.getDiffTitle(diff);
+		return (
+			<Button 
+					//vertical={true}
+          onPressAction={BUTTON_PRESS.START_DIFFICULTY}
+          onPressData={{diff}}
+          //text={diffLabel}
+          icon="grid"
+          iconSize="12" 
+          style={styles.backButton}
+          //textStyle={styles.buttonText}
+      	/>
 		)
 	}
 
@@ -61,7 +81,8 @@ export default class Topbar extends React.Component {
 		return (
 			<View style={styles.container}>
 				{this.renderBackButton()}
-				{this.renderHomeButton()}
+        {this.renderHomeButton()}
+        {this.renderDiffButton()}
 		        <Text style={styles.title}>{this.props.title}</Text>
 		        {this.renderRightSpace()}
 			</View>

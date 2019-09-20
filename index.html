@@ -22,7 +22,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-	<title>React App</title>
+	<title>Rock Paper Scissors Puzzle</title>
 <style>
 	/* These styles make the body full-height */
 	html,
@@ -31,22 +31,57 @@
 	}
 	/* These styles disable body scrolling if you are using <ScrollView> */
 	body {
-		overflow: hidden;
+    overflow: hidden;
+    background-color: #E5AF71;
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/api-project-1028663812815.appspot.com/o/tex12.jpg?alt=media&token=c65569b0-bc40-482a-bf3a-9ab11f128c07');
 	}
 	/* These styles make the root element full-height */
 	#root {
 		display: flex;
 		height: 100%;
-	}
+  }
+  .audio-button {
+    position: absolute; right: 3px; bottom: 8px; 
+    color: #ffffff; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 12px; font-style: normal; font-weight: normal; height: 21px;
+    text-align: center;
+    cursor: pointer;
+  }
 </style>
+<link rel="stylesheet" type="text/css" href="preloader.css">
+<script>
+    var audio;
+    var muted = false;
+    var source = 'https://firebasestorage.googleapis.com/v0/b/api-project-1028663812815.appspot.com/o/bensound-summer.mp3?alt=media&token=c1d67d85-6e77-44af-9f91-e0c724373f82';
+    audio = new Audio(); 
+    audio.src = source;
+    audio.autoplay = false; 
+    audio.loop = true; 
+  
+    function audioOnClick(flag) {
+      if (!flag) {
+        audio.pause();
+        document.getElementById('audio-muted').style.display="block"
+        document.getElementById('audio').style.display="none"
+        document.getElementById('root').classList.remove('with-audio');
+      } else {
+        audio.play();
+        muted = false;
+        document.getElementById('audio-muted').style.display="none"
+        document.getElementById('audio').style.display="block"
+        document.getElementById('root').classList.add('with-audio');
+      }
+    }
+    
+  </script>
+
 </head>
 
 <body>
 	<noscript>
 		You need to enable JavaScript to run this app.
 	</noscript>
-  <div id="root" ></div>
-  <script src="bundle.js" ></script>
+  <div id="root" class="with-preloader"></div>
+  
 	<!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -57,6 +92,8 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <div id="audio-muted" class="audio-button" onclick="javascript:audioOnClick(true)">Music is<br>OFF</div>
+    <div id="audio" style="display:none;" class="audio-button" onclick="javascript:audioOnClick(false)">Music is<br>ON</div>
 </body>
-
+<script async src="bundle.js" ></script>
 </html>

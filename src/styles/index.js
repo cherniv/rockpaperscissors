@@ -41,7 +41,12 @@ button = {
 	},
 	shadowRadius: 0.6,
 	shadowOpacity: 0.3,
-	...centeredContent,
+  ...centeredContent,
+  ...Device.select({
+    web: {
+      boxShadow: 'inset 0 -1px rgba(0,0,0,0.1)'
+    }
+  })
 },
 buttonWhite = {
 	backgroundColor: 'rgba(255,255,255,0.1)',
@@ -113,26 +118,26 @@ whiteText = {
 	color: '#ffffff',
 },
 shadowForText = {
-	textShadowColor: 'rgba(0, 0, 0, 0.1)',
-  textShadowOffset: {width: 0, height: 1},
+	textShadowColor: 'rgba(0, 0, 0, 0.4)',
+  textShadowOffset: {width: 0, height: 0.4},
   textShadowRadius: 2
 },
 mainLabel = {
-	...shadowForText,
 	paddingTop: px(20),
 	paddingBottom: px(8),
 },
 mainLabelText = {
-	...buttonText,
+  ...buttonText,
+  ...shadowForText,
 	fontSize: px(20),
 	textAlign: center,
 }, 
 mainSublabel = {
-	...shadowForText,
 	marginBottom: px(8),
 },
 mainSublabelText = {
-	...buttonText,
+  ...buttonText,
+  ...shadowForText,
 	fontSize: px(16),
 	textAlign: center,
 	lineHeight: px(18)
@@ -341,7 +346,6 @@ export const
 			flex: 1,
       paddingHorizontal: px(5),
       alignItems: 'flex-end',
-			...shadowForText,
 			//...centeredContent
 		},
 		hintIconImage: {
@@ -358,7 +362,8 @@ export const
 		},
 		timerText: {
 			//textAlign: center,
-			...whiteText,
+      ...whiteText,
+      ...shadowForText,
 			fontSize: px(11),
 			fontFamily: "Open Sans",
 			lineHeight: px(16),

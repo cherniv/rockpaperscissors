@@ -3,8 +3,11 @@ import * as firebase from 'firebase';
 import Auth from '../services/Auth'
 import ActionTypes from '../actions'
 import NetInfo from '../utils/NetInfo'
-import FirebaseService, {saveUserData as sud, getUserData as gud} from '../services/FirebaseService'
+import FirebaseService from '../services/FirebaseService'
 import t from '../utils/i18n' 
+
+var sud = FirebaseService.saveUserData;
+var gud = FirebaseService.getUserData;
 
 //LocalStorage.removeItem('difficulties')
 import Dispatcher from '../dispatcher';
@@ -188,7 +191,8 @@ var getCompletedLevelsCount = () => {
 
 var updateCompleteLevelsCount = () => {
 	setTimeout(()=>{
-		var totalCompleted = getCompletedLevelsCount();
+    var totalCompleted = getCompletedLevelsCount();
+    
 		sud('completedLevelsCount', totalCompleted)
 	},50)
 }

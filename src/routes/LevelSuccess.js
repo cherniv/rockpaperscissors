@@ -47,7 +47,7 @@ class LevelSuccess extends Component {
 		return (
 			<Background>
 				<View style={styles.container}>
-					<Topbar title={t.t('levelSuccess.title', {level: (params.id+1)})} noback />
+					<Topbar title={t.t('levelSuccess.title', {level: (params.id+1)})} noback diff={params.diff} />
 					<Button 
 				        onPressAction={isLastInDiff ? BUTTON_PRESS.DIFFICULTY_SUCCESS : BUTTON_PRESS.START_LEVEL}
 				        onPressData={{diff: params.diff, id: params.id+1}}
